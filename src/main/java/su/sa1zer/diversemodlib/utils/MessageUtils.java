@@ -10,12 +10,16 @@ public class MessageUtils {
         player.displayClientMessage(Component.literal(message), true);
     }
 
-    public static void sendClientMessage(ServerPlayer player, String message) {
-        player.displayClientMessage(Component.literal(message), true);
+    public static void sendClientMessage(Player player, String message, String... args) {
+        player.displayClientMessage(Component.literal(String.format(message, args)), true);
     }
 
     public static void sendChatMessage(Player player, String message) {
         player.sendSystemMessage(Component.literal(message));
+    }
+
+    public static void sendChatMessage(Player player, String message, String... args) {
+        player.sendSystemMessage(Component.literal(String.format(message, args)));
     }
 
 
