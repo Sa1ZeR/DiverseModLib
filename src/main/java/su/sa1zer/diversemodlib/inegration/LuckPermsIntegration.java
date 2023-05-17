@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 public class LuckPermsIntegration {
 
     public static boolean hasPermissions(CommandSourceStack stack, String permission) {
-        return hasPermission(stack.getPlayer(), permission);
+        return hasPermissions(stack.getPlayer(), permission);
     }
 
-    public static boolean hasPermission(ServerPlayer player, String permission) {
+    public static boolean hasPermissions(ServerPlayer player, String permission) {
         if (player == null)
             return false;
 
