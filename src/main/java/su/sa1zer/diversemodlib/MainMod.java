@@ -12,5 +12,6 @@ public class MainMod {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public MainMod() {
+
     }
 }
