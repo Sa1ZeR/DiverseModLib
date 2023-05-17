@@ -2,6 +2,7 @@ package su.sa1zer.diversemodlib.utils;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.player.Player;
 
 public class MessageUtils {
@@ -22,5 +23,19 @@ public class MessageUtils {
         player.sendSystemMessage(Component.literal(String.format(message, args)));
     }
 
+    public static void sendBroadcastMessage(String message) {
+        PlayerList playerList = ServerUtils.getServer().getPlayerList();
 
+        for(ServerPlayer player : playerList.getPlayers()) {
+            sendChatMessage(player, message);
+        }
+    }
+
+    public static void sendBroadcastClientMessage(String message) {
+        PlayerList playerList = ServerUtils.getServer().getPlayerList();
+
+        for(ServerPlayer player : playerList.getPlayers()) {
+            sendClientMessage(player, message);
+        }
+    }
 }
