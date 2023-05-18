@@ -6,8 +6,6 @@ public class ItemUtils {
 
     public static boolean canRepair(ItemStack stack) {
         return !stack.equals(ItemStack.EMPTY) && stack.isDamageableItem() &&
-                (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof AxeItem
-                        || stack.getItem() instanceof PickaxeItem ||
-                        stack.getItem() instanceof ShovelItem || stack.getItem() instanceof BowItem);
+                (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof TieredItem || stack.getItem() instanceof BowItem);
     }
 }
