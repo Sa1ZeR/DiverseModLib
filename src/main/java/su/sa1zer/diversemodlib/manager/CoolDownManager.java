@@ -7,8 +7,8 @@ public class CoolDownManager<T> {
 
     private final Map<T, Long> coolDownMap = new HashMap<>();
 
-    public void addToCooldown(T object, long time) {
-        coolDownMap.put(object, System.currentTimeMillis() + time);
+    public void addToCooldown(T object, long seconds) {
+        coolDownMap.put(object, System.currentTimeMillis() + seconds * 1000);
     }
 
     public boolean isCoolDown(T object) {
