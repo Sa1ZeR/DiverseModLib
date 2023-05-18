@@ -19,6 +19,10 @@ public class CoolDownManager<T> {
     }
 
     public long getTime(T object) {
-        return coolDownMap.getOrDefault(object, 0L);
+        long time = coolDownMap.getOrDefault(object, 0L);
+        time = time - System.currentTimeMillis();
+
+        if(time <= 0) return 0;
+        return time / 1000;
     }
 }
