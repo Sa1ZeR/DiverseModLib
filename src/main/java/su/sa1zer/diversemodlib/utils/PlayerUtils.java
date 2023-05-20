@@ -53,7 +53,7 @@ public class PlayerUtils {
     public void giveItemsSafely(Player player, List<ItemStack> items) {
 //        List<ItemStack> overSize = new ArrayList<>();
 
-        int freeSlotsAmount = getFreeSlotsAmount(player);
+        int freeSlotsAmount = Math.min(getFreeSlotsAmount(player), items.size());
         int i;
         for(i = 0; i < freeSlotsAmount; i++) {
             ItemStack itemStack = items.get(i);
@@ -66,7 +66,7 @@ public class PlayerUtils {
 //                itemStack.setCount(itemStack.getCount() - size);
 //            }
 
-            player.addItem(itemStack);
+            player.addItem(itemStack.copy());
         }
 
         boolean isWarn = i < items.size();
