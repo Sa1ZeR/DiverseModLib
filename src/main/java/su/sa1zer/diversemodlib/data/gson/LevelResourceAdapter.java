@@ -21,7 +21,7 @@ public class LevelResourceAdapter implements JsonDeserializer<ResourceKey<Level>
     public JsonElement serialize(ResourceKey<Level> src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject obj = new JsonObject();
 
-        obj.addProperty("world", src.toString());
+        obj.addProperty("world", src.location().toString());
 
         return obj;
     }
