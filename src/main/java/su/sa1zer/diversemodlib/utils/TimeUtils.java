@@ -3,6 +3,7 @@ package su.sa1zer.diversemodlib.utils;
 import joptsimple.internal.Strings;
 import lombok.experimental.UtilityClass;
 
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class TimeUtils {
             message.add(arr[0]);
         }
 
-        return Strings.join(message, " ");
+        return String.join(" ", message);
     }
 
     public static String declOfNum(long n, String[] arr) {
