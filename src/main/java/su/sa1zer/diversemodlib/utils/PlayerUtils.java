@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +27,19 @@ public class PlayerUtils {
 
     public static ServerPlayer getPlayer(String name) {
         return ServerUtils.getServer().getPlayerList().getPlayerByName(name);
+    }
+
+    public static List<ServerPlayer> getNearbyPlayers(ServerPlayer player, int distance) {
+        List<ServerPlayer> players = new ArrayList<>();
+
+        PlayerList playerList = ServerUtils.getServer().getPlayerList();
+        for(ServerPlayer p : playerList.getPlayers()) {
+            if(p.getGameProfile().equals(player.getGameProfile())) continue;
+            if(p.getLevel().equals(player.getLevel()) && p.distanceTo(player) <= distance)
+                players.add(p);
+        }
+
+        return players;
     }
 
     public static void teleportPlayer(ServerPlayer player, Player toPlayer) {
