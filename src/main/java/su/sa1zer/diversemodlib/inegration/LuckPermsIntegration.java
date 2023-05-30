@@ -36,4 +36,20 @@ public class LuckPermsIntegration {
                 .collect(Collectors.toSet());
         return groups.contains(group);
     }
+
+    public static String getPrefix(ServerPlayer player) {
+        if (player == null)
+            return "";
+
+        return LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
+                .getCachedData().getMetaData().getPrefix();
+    }
+
+    public static String getSuffix(ServerPlayer player) {
+        if (player == null)
+            return "";
+
+        return LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
+                .getCachedData().getMetaData().getSuffix();
+    }
 }
