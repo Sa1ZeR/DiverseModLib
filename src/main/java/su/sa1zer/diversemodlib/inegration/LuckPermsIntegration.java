@@ -41,15 +41,17 @@ public class LuckPermsIntegration {
         if (player == null)
             return "";
 
-        return LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
+        String prefix = LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
                 .getCachedData().getMetaData().getPrefix();
+        return prefix == null ? "" : prefix;
     }
 
     public static String getSuffix(ServerPlayer player) {
         if (player == null)
             return "";
 
-        return LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
+        String suffix = LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
                 .getCachedData().getMetaData().getSuffix();
+        return suffix == null ? "" : suffix;
     }
 }
