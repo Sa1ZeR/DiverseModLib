@@ -50,8 +50,12 @@ public class PlayerUtils {
         teleportPlayer(player, level, pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, player.getYRot(), player.getXRot());
     }
 
+    public static void teleportPlayer(ServerPlayer player, ResourceKey<Level> level, BlockPos pos, float yRot, float xRot) {
+        teleportPlayer(player, level, pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, yRot, xRot);
+    }
+
     public static void teleportPlayer(ServerPlayer player, ResourceKey<Level> level,
-                                      double x, double y , double z, float xRot, float yRot) {
+                                      double x, double y , double z, float yRot, float xRot) {
         ServerLevel world = player.server.getLevel(level);
 
         if (world == null) {
@@ -60,7 +64,7 @@ public class PlayerUtils {
         }
 
         int lvl = player.experienceLevel;
-        player.teleportTo(world, x, y, z, xRot, yRot);
+        player.teleportTo(world, x, y, z, yRot, xRot);
         player.setExperienceLevels(lvl);
     }
 
