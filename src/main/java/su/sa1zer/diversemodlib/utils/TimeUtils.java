@@ -21,27 +21,22 @@ public class TimeUtils {
 
         if(diffYears > 0) {
             message.add(String.valueOf(diffYears));
-            message.add(" ");
             message.add(arr[4]);
         }
         if(diffMonths > 0){
             message.add(String.valueOf(diffMonths));
-            message.add(" ");
             message.add(arr[3]);
         }
         if(diffHours > 0) {
             message.add(String.valueOf(diffHours));
-            message.add(" ");
             message.add(arr[2]);
         }
         if(diffMinutes > 0) {
             message.add(String.valueOf(diffMinutes));
-            message.add(" ");
             message.add(arr[1]);
         }
         if(diffSeconds > 0){
             message.add(String.valueOf(diffSeconds));
-            message.add(" ");
             message.add(arr[0]);
         }
 
