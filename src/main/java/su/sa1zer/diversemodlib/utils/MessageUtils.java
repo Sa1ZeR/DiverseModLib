@@ -1,5 +1,6 @@
 package su.sa1zer.diversemodlib.utils;
 
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
@@ -21,6 +22,14 @@ public class MessageUtils {
 
     public static void sendChatMessage(Player player, String message, String... args) {
         player.sendSystemMessage(Component.literal(String.format(message, args)));
+    }
+
+    public static void sendChatMessage(CommandSourceStack sender, String message, String... args) {
+        sender.sendSystemMessage(Component.literal(String.format(message, args)));
+    }
+
+    public static void sendChatMessage(CommandSourceStack sender, String message) {
+        sender.sendSystemMessage(Component.literal(message));
     }
 
     public static void sendBroadcastMessage(String message) {
