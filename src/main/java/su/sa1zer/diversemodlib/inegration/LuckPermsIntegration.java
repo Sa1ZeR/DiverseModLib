@@ -18,7 +18,7 @@ public class LuckPermsIntegration {
 
     public static boolean hasPermissions(ServerPlayer player, String permission) {
         if (player == null)
-            return false;
+            return true;
 
         User user = LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player);
 
