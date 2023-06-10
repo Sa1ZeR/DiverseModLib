@@ -54,4 +54,12 @@ public class LuckPermsIntegration {
                 .getCachedData().getMetaData().getSuffix();
         return suffix == null ? "" : suffix;
     }
+
+    public static String getMeta(ServerPlayer player, String key) {
+        if (player == null)
+            return null;
+
+        return LuckPermsProvider.get().getPlayerAdapter(ServerPlayer.class).getUser(player)
+                .getCachedData().getMetaData().getMetaValue(key);
+    }
 }
