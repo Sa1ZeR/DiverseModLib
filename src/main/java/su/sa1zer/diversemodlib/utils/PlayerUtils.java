@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import su.sa1zer.diversemodlib.MainMod;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,6 +67,10 @@ public class PlayerUtils {
         int lvl = player.experienceLevel;
         player.teleportTo(world, x, y, z, yRot, xRot);
         player.setExperienceLevels(lvl);
+    }
+
+    public void giveItemsSafely(Player player, ItemStack item) {
+        giveItemsSafely(player, List.of(item));
     }
 
     public void giveItemsSafely(Player player, List<ItemStack> items) {
