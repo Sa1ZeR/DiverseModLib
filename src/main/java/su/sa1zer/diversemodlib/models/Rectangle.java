@@ -28,7 +28,7 @@ public class Rectangle {
         }
 
         public boolean isContains(BlockPos pos) {
-            return isContains(pos.getX(), pos.getY(), pos.getY());
+            return isContains(pos.getX(), pos.getY(), pos.getZ());
         }
 
         public boolean isContains(int x, int y, int z) {
