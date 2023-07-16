@@ -32,19 +32,19 @@ public class MessageUtils {
         sender.sendSystemMessage(Component.literal(message));
     }
 
-    public static void sendBroadcastMessage(String message) {
+    public static void sendBroadcastMessage(String message, String... args) {
         PlayerList playerList = ServerUtils.getServer().getPlayerList();
 
         for(ServerPlayer player : playerList.getPlayers()) {
-            sendChatMessage(player, message);
+            sendChatMessage(player, message, args);
         }
     }
 
-    public static void sendBroadcastClientMessage(String message) {
+    public static void sendBroadcastClientMessage(String message, String... args) {
         PlayerList playerList = ServerUtils.getServer().getPlayerList();
 
         for(ServerPlayer player : playerList.getPlayers()) {
-            sendClientMessage(player, message);
+            sendClientMessage(player, message, args);
         }
     }
 }
