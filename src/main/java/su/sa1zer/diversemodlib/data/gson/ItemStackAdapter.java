@@ -1,10 +1,18 @@
 package su.sa1zer.diversemodlib.data.gson;
 
 import com.google.gson.*;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.commands.GiveCommand;
+import net.minecraft.server.commands.ItemCommands;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import su.sa1zer.diversemodlib.MainMod;
 
 import java.lang.reflect.Type;
 
@@ -20,8 +28,14 @@ public class ItemStackAdapter implements JsonSerializer<ItemStack>, JsonDeserial
 
         stack.setCount(jsonObject.get("amount").getAsInt());
         stack.setDamageValue(jsonObject.get("damage").getAsInt());
-        if(jsonObject.has("nbt"))
-            stack.setTag(context.deserialize(jsonObject.get("nbt"), TagAdapter.TYPE));
+        if(jsonObject.has("nbt")) {
+            try {
+                CompoundTag nbt = TagParser.parseTag(jsonObject.get("nbt").getAsString());
+                stack.setTag(nbt);
+            } catch (CommandSyntaxException e) {
+                MainMod.LOGGER.error("Cant parse nbt {}", jsonObject);
+            }
+        }
 
         return stack;
     }
@@ -38,7 +52,10 @@ public class ItemStackAdapter implements JsonSerializer<ItemStack>, JsonDeserial
         jsonObject.addProperty("amount", src.getCount());
         jsonObject.addProperty("damage", src.getDamageValue());
         if(src.getTag() != null && !src.getTag().isEmpty())
-            jsonObject.add("nbt", context.serialize(src.getTag()));
+            jsonObject.addProperty("nbt", src.getTag().toString());
+
+        if(src.getTag() != null && !src.getTag().isEmpty())
+            System.out.println(src.getTag());
 
         return jsonObject;
     }
