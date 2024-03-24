@@ -3,21 +3,26 @@ package su.sa1zer.diversemodlib.utils;
 import lombok.experimental.UtilityClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.commands.PlaySoundCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.sound.SoundEvent;
 import su.sa1zer.diversemodlib.MainMod;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @UtilityClass
 public class PlayerUtils {
@@ -67,6 +72,17 @@ public class PlayerUtils {
         int lvl = player.experienceLevel;
         player.teleportTo(world, x, y, z, yRot, xRot);
         player.setExperienceLevels(lvl);
+
+        world.playSound(player, x, y, z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
+        world.playLocalSound(x, y, z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F, false);
+    }
+
+    public Optional<BlockHitResult> getFocusedBlock(ServerPlayer player, double maxDist) {
+        Vec3 entityVec = player.getEyePosition(1f);
+        Vec3 maxDistVec = entityVec.add(player.getViewVector(1F).scale(maxDist));
+        ClipContext ctx = new ClipContext(entityVec, maxDistVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player);
+        BlockHitResult hitResult = player.level.clip(ctx);
+        return hitResult.getType() == HitResult.Type.BLOCK ? Optional.of(hitResult) : Optional.empty();
     }
 
     public void giveItemsSafely(Player player, ItemStack item) {
