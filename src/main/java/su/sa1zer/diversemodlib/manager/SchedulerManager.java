@@ -13,14 +13,11 @@ import java.util.List;
 
 public class SchedulerManager {
 
+    @Getter
     private static final SchedulerManager INSTANCE = new SchedulerManager();
 
     private SchedulerManager() {
 
-    }
-
-    public static SchedulerManager getINSTANCE() {
-        return INSTANCE;
     }
 
     public void execute(Runnable runnable) {
