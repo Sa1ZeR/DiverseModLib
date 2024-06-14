@@ -41,7 +41,7 @@ public class PlayerUtils {
         PlayerList playerList = ServerUtils.getServer().getPlayerList();
         for(ServerPlayer p : playerList.getPlayers()) {
             if(p.getGameProfile().equals(player.getGameProfile())) continue;
-            if(p.getLevel().equals(player.getLevel()) && p.distanceTo(player) <= distance)
+            if(p.level().equals(player.level()) && p.distanceTo(player) <= distance)
                 players.add(p);
         }
 
@@ -49,7 +49,7 @@ public class PlayerUtils {
     }
 
     public static void teleportPlayer(ServerPlayer player, Player toPlayer) {
-        teleportPlayer(player, toPlayer.level.dimension(), toPlayer.blockPosition());
+        teleportPlayer(player, toPlayer.level().dimension(), toPlayer.blockPosition());
     }
 
     public static void teleportPlayer(ServerPlayer player, ResourceKey<Level> level, BlockPos pos) {
@@ -81,7 +81,7 @@ public class PlayerUtils {
         Vec3 entityVec = player.getEyePosition(1f);
         Vec3 maxDistVec = entityVec.add(player.getViewVector(1F).scale(maxDist));
         ClipContext ctx = new ClipContext(entityVec, maxDistVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player);
-        BlockHitResult hitResult = player.level.clip(ctx);
+        BlockHitResult hitResult = player.level().clip(ctx);
         return hitResult.getType() == HitResult.Type.BLOCK ? Optional.of(hitResult) : Optional.empty();
     }
 
@@ -113,7 +113,7 @@ public class PlayerUtils {
             ItemStack itemStack = items.get(i);
 
             BlockPos pos = player.blockPosition();
-            player.level.addFreshEntity(new ItemEntity(player.level, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack));
+            player.level().addFreshEntity(new ItemEntity(player.level(), pos.getX(), pos.getY() + 1, pos.getZ(), itemStack));
         }
 
         if(isWarn) {

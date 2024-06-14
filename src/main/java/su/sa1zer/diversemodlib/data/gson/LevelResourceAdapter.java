@@ -2,6 +2,7 @@ package su.sa1zer.diversemodlib.data.gson;
 
 import com.google.gson.*;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -13,7 +14,7 @@ public class LevelResourceAdapter implements JsonDeserializer<ResourceKey<Level>
     @Override
     public ResourceKey<Level> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         String world = json.getAsJsonObject().get("world").getAsString();
-        return ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(world));
+        return ResourceKey.create(Registries.DIMENSION, new ResourceLocation(world));
     }
 
 
