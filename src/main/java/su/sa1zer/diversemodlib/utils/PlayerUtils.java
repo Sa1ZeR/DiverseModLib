@@ -73,8 +73,7 @@ public class PlayerUtils {
         player.teleportTo(world, x, y, z, yRot, xRot);
         player.setExperienceLevels(lvl);
 
-        world.playSound(player, x, y, z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-        world.playLocalSound(x, y, z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F, false);
+        player.level().playSound(null, x, y, z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 100f, 100f);
     }
 
     public Optional<BlockHitResult> getFocusedBlock(ServerPlayer player, double maxDist) {
